@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="POST" name="register" action="/register">
+        {{ unique-user }}
+        {{ pass-match }}
+        {% if unique-user is defined %}
+            Come on, be original. Username already taken. 
+        {% endif %}
+        
+        {{ m.input("username", "", "text", 25, "Create your username") }}
+        
+        {% if pass-match is defined %}
+            Did you forget what password you typed the first time? Passwords don't match.
+        {% endif %}
+        
+        {{ m.input("password1", "", "password", 25, "Create a password") }}
+        
+        {{ m.input("password2", "", "password", 25, "Verify password") }}
+        
+        {{ m.input("submit", "Register", "submit") }}
+    
+    </form>
+
+{% endblock %}
