@@ -1,16 +1,9 @@
 <?php
 /**
- * @brief   Add a new entry to the binary tree list
- *
- *          Navigates through the tree to print to outfile
- *          in correct order. Compares newNode to the root,
- *          then chooses the correct path to take. Starts
- *          recusion over
- *
- * @param   currentRoot     node to start navigation
- *          newNode         pointer to add to the tree
- *
- * @return  none
+ * @brief   User model represented by database table 'user'
+ *          using j4mie/paris ORM
+ * 
+ * @author  John Reach
  */
 
 set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../');

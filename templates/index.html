@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+        {% if name %}
+            <h2>Hello {{ name }}!</h2>
+        {% else %}
+            <p>Try <a href="/SlimFramework">/SlimFramework</a>
+        {% endif %}
+{% endblock %}
