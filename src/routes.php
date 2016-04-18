@@ -5,7 +5,7 @@ require_once('data_controller.php');
  
 $app->get('/', function ($request, $response, $args) {
     
-    return $this->view->render($response, 'index.html', $args);
+    return $this->view->render($response, 'login_form.html', $args);
 });
 
 $app->get('/register', function ($request, $response, $args) {
@@ -18,16 +18,18 @@ $app->post('/register', function ($request, $response, $args) {
     $body = $request->getParsedBody();
     $view = 'register_form.html';
     
-    $args['unique-user'] = uniqueUser($body['username']);
-    $args['pass-match']  = passwordsMatch($body['password1'], $body['password2']);
+    $unique_user = uniqueUser($body['username']);
+    $pass_match  = passwordsMatch($body['password1'], $body['password2']);
     
-    $args['username'] = $username;
-    
-    if($args['unique-user'] && $args['pass-match']) {
+    if($unique_user && $pass_match) {
         
         addUser($body['username'], $body['password1']);
         $view = 'register_success.html';
     }
     
-    return $this->view->render($response, $view, $args);
+    return $this->view->render($response, $view, [
+            'username'    => $body['username'],
+            'uniqueUser' => !$unique_user,
+            'passMatch'  => !$pass_match
+        ]);
 });

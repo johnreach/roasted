@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="POST" action="/login" name="login">
+        
+        {{ m.input("username", "", "text", 25, "Username ") }}
+        
+        {{ m.input("password", "", "password", 25, "Password ") }}
+        
+        {{ m.input("submit", "Login", "submit") }}
+        
+    </form>
+    
+{% endblock %}
