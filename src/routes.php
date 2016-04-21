@@ -34,3 +34,30 @@ $app->post('/register', function ($request, $response, $args) {
             'passMatch'  => !$pass_match
         ]);
 });
+
+$app->get('/login', function ($request, $response, $args) {
+    
+    return $this->view->render($response, 'login_form.html', $args);
+});
+
+$app->post('/login', function ($request, $response, $args) {
+    
+    $body = $request->getParsedBody();
+    $view = 'login_form.html';
+    $username = $body['username'];
+    $password = $body['password'];
+    
+    $user = new UserController();
+    
+    if($user->login($username, $password)) {
+        
+        $view = 'register_success.html';
+        $args = ['username' => $username];
+        
+    } else {
+         
+        $args = [ 'message' => "Incorrect credentials"];
+    }
+    
+    return $this->view->render($response, $view, $args);
+});
