@@ -1,7 +1,7 @@
 <?php
 // Routes
 
-require_once('data_controller.php');
+require_once('UserController.php');
  
 $app->get('/', function ($request, $response, $args) {
     
@@ -17,13 +17,14 @@ $app->post('/register', function ($request, $response, $args) {
     
     $body = $request->getParsedBody();
     $view = 'register_form.html';
+    $user = new UserController();
     
-    $unique_user = uniqueUser($body['username']);
-    $pass_match  = passwordsMatch($body['password1'], $body['password2']);
+    $unique_user = $user->uniqueName($body['username']);
+    $pass_match  = $user->passwordsMatch($body['password1'], $body['password2']);
     
     if($unique_user && $pass_match) {
         
-        addUser($body['username'], $body['password1']);
+        $user->addUser($body['username'], $body['password1']);
         $view = 'register_success.html';
     }
     

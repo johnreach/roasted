@@ -4,7 +4,7 @@ require_once('models/User.php');
 
 class UserController {
     
-    function uniqueUser($username) {
+    function uniqueName($username) {
         
         $user = Model::factory('User')->where_equal('username', $username)->find_one();
         
