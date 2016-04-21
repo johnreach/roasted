@@ -27,5 +27,7 @@ class UserController {
         $user->save();
     }
     
+    function login($username, $password);
+    
 }
 
