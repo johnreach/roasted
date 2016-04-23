@@ -5,7 +5,7 @@ require_once('UserController.php');
  
 $app->get('/', function ($request, $response, $args) {
     
-    return $this->view->render($response, 'login_form.html', $args);
+    return $this->view->render($response, 'index.html', $args);
 });
 
 $app->get('/register', function ($request, $response, $args) {
@@ -35,29 +35,36 @@ $app->post('/register', function ($request, $response, $args) {
         ]);
 });
 
+
 $app->get('/login', function ($request, $response, $args) {
     
     return $this->view->render($response, 'login_form.html', $args);
 });
 
+
 $app->post('/login', function ($request, $response, $args) {
     
+    $username = null;
+    
+    $user = new UserController();
     $body = $request->getParsedBody();
-    $view = 'login_form.html';
+
     $username = $body['username'];
     $password = $body['password'];
     
-    $user = new UserController();
-    
-    if($user->login($username, $password)) {
+    $result = $user->login($username, $password);
+
+    if ($result->isValid()) {
         
         $view = 'register_success.html';
-        $args = ['username' => $username];
-        
+
     } else {
-         
-        $args = [ 'message' => "Incorrect credentials"];
+        
+        $messages = $result->getMessages();
+        $app->flashNow('error', $messages[0]);
+        $app->redirect('/login');
     }
+
+    $this->view->render($response, 'register_success.html', array('username' => $username));
     
-    return $this->view->render($response, $view, $args);
-});
+})->setName('login');

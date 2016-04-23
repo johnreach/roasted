@@ -2,6 +2,10 @@
 
 require_once('models/User.php');
 
+use JeremyKendall\Password\PasswordValidator;
+use JeremyKendall\Slim\Auth\Adapter\Db\PdoAdapter;
+use JeremyKendall\Slim\Auth\Bootstrap;
+
 class UserController {
     
     function uniqueName($username) {
@@ -21,7 +25,7 @@ class UserController {
         $user = Model::factory('User')->create();
         $user->username = $username;
         $user->password = password_hash($password, PASSWORD_BCRYPT);
-        $user->type     = "regular";
+        $user->role     = "member";
         $user->created  = time();
         
         $user->save();
@@ -29,7 +33,7 @@ class UserController {
     
     function login($username, $password) {
         
-        
+        return $app->authenticator->authenticate($username, $password);
     }
     
 }
