@@ -8,6 +8,7 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
+// Vendor loader
 require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
@@ -25,8 +26,7 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-// Database Settings
-//require __DIR__ . '/../src/database-settings.php';
+ORM::configure($settings['settings']['db']);
 
 // Run app
 $app->run();
