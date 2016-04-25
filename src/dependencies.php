@@ -3,14 +3,6 @@
 
 $container = $app->getContainer();
 
-/*
-// view renderer
-$container['renderer'] = function ($c) {
-    $settings = $c->get('settings')['renderer'];
-    return new Slim\Views\PhpRenderer($settings['template_path']);
-};
-*/
-
 // monolog
 $container['logger'] = function ($c) {
     $settings = $c->get('settings')['logger'];
@@ -25,7 +17,9 @@ $container['view'] = function ($container) {
     
     $settings = $container->get('settings')['renderer'];
     
-    $view = new \Slim\Views\Twig($settings['template_path']);
+    $view = new \Slim\Views\Twig($settings['template_path'], [
+        'cache' => false
+    ]);
     //$view->setCache(false);
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container['router'],
@@ -33,4 +27,14 @@ $container['view'] = function ($container) {
     ));
 
     return $view;
+};
+
+$container['HomeController'] = function($container) {
+    
+    return new \Roasted\Controllers\HomeController($container);
+};
+
+$container['AuthController'] = function($container) {
+    
+    return new \Roasted\Controllers\AuthController($container);
 };

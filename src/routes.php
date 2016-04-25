@@ -1,23 +1,19 @@
 <?php
 // Routes
+$app->get('/', 'HomeController:index')->setName('index');
 
-require_once('UserController.php');
- 
-$app->get('/', function ($request, $response, $args) {
-    
-    return $this->view->render($response, 'index.html', $args);
-});
+$app->get('/register', 'AuthController:getRegister')->setName('register');
+$app->post('/register', 'AuthController:postRegister');
 
-$app->get('/register', function ($request, $response, $args) {
-    
-    return $this->view->render($response, 'register_form.html', $args);
-});
+$app->get('/login', 'AuthController:getLogin')->setName('login');
+$app->post('/login', 'AuthController:postLogin');
 
+/*
 $app->post('/register', function ($request, $response, $args) {
     
     $body = $request->getParsedBody();
     $view = 'register_form.html';
-    $user = new UserController();
+    $user = new Controllers\UserController;
     
     $unique_user = $user->uniqueName($body['username']);
     $pass_match  = $user->passwordsMatch($body['password1'], $body['password2']);
@@ -46,7 +42,7 @@ $app->post('/login', function ($request, $response, $args) {
     
     $username = null;
     
-    $user = new UserController();
+    $user = new Controllers\UserController;
     $body = $request->getParsedBody();
 
     $username = $body['username'];
@@ -68,3 +64,4 @@ $app->post('/login', function ($request, $response, $args) {
     $this->view->render($response, 'register_success.html', array('username' => $username));
     
 })->setName('login');
+*/
