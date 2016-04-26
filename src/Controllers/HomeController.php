@@ -9,7 +9,7 @@
 namespace Roasted\Controllers;
 
 use \Roasted\Controllers\Controller;
-use \Roasted\Models\User;
+use \Roasted\Models\User as User;
 
 class HomeController extends Controller {
     
