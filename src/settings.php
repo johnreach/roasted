@@ -13,5 +13,12 @@ return [
             'name' => 'slim-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
-    ],
+        
+        // Database settings
+        'db' => [
+            'connection_string' => 'mysql:host=localhost;dbname=roasted',
+            'username' => 'root',
+            'password' => 'causeytestarehard'
+        ]
+    ]
 ];

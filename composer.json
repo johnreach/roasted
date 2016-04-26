@@ -17,7 +17,13 @@
         "slim/php-view": "^2.0",
         "monolog/monolog": "^1.17",
         "j4mie/paris": "^1.5",
-        "slim/twig-view": "^2.1",
-        "jeremykendall/slim-auth": "^1.0"
+        "slim/twig-view": "^2.1"
+    },
+    "autoload": {
+      
+        "psr-4": {
+            "Roasted\\": "src"
+        }
+      
     }
 }
