@@ -32,6 +32,12 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+
+$container['csrf'] = function($container) {
+    
+    return new Slim\Csrf\Guard;
+};
+
 $container['HomeController'] = function($container) {
     
     return new \Roasted\Controllers\HomeController($container);
