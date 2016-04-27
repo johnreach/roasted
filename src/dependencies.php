@@ -1,5 +1,8 @@
 <?php
 // DIC configuration
+use Respect\Validation\Validator as v;
+
+v::with('Roasted\\Validation\\Rules\\');
 
 $container = $app->getContainer();
 
@@ -36,5 +39,10 @@ $container['HomeController'] = function($container) {
 
 $container['AuthController'] = function($container) {
     
-    return new \Roasted\Controllers\AuthController($container);
+    return new \Roasted\Controllers\Auth\AuthController($container);
+};
+
+$container['validator'] = function($container) {
+    
+    return new \Roasted\Validation\Validator;
 };

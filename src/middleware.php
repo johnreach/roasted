@@ -1,4 +1,5 @@
 <?php
-// Application middleware
 
-// e.g: $app->add(new \Slim\Csrf\Guard);
+// Application middleware
+$app->add(new Roasted\Middleware\ValidationErrors($container));
+$app->add(new Roasted\Middleware\PersistInput($container));
