@@ -15,6 +15,11 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$container['auth'] = function($container) {
+    
+    return new Roasted\Auth\Auth;
+};
+
 // Register twig view
 $container['view'] = function ($container) {
     
@@ -28,6 +33,11 @@ $container['view'] = function ($container) {
         $container['router'],
         $container['request']->getUri()
     ));
+    
+    $view->getEnvironment()->addGlobal('auth', [
+        'check' => $container->auth->checkLogin(),
+        'user'  => $container->auth->getUser(),
+    ]);
 
     return $view;
 };

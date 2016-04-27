@@ -27,5 +27,7 @@ require __DIR__ . '/src/middleware.php';
 // Register routes
 require __DIR__ . '/src/routes.php';
 
+ORM::configure($settings['settings']['db']);
+
 // Run app
 $app->run();

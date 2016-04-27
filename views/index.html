@@ -8,7 +8,7 @@
 	<meta name="author" content="Dashboard">
 	<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-	<title>roast - inspired by r/roastme</title>
+	<title>roasted - inspired by r/roastme</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="public/css/bootstrap.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 	<link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<link href="{{ base_url() }}public/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	<link href="public/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="public/css/style.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 	<link href="public/css/custom.css" rel="stylesheet">
 
 	<script src="public/css/js/chart-master/Chart.js"></script>
-
+	<script src="public/css/js/custom/RequestController.js"></script>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -53,59 +53,10 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Sign Up</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="registerForm">
 
 					<!-- Start Wizard -->
-					<div class="wizard" data-initialize="wizard" id="myWizard">
-						<div class="steps-container">
-							<ul class="steps">
-								<li data-step="1" data-name="campaign" class="active">
-									<span class="badge">1</span>Details
-									<span class="chevron"></span>
-								</li>
-								<li data-step="2">
-									<span class="badge">2</span>Photo
-									<span class="chevron"></span>
-								</li>
-							</ul>
-						</div>
-						<div class="actions">
-							<button type="button" class="btn btn-default btn-prev">
-                  <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-							<button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
-                  <span class="glyphicon glyphicon-arrow-right"></span>
-                </button>
-						</div>
-						<div class="step-content">
-							<div class="step-pane active sample-pane alert" data-step="1">
-								<h4>Account Details</h4>
-								<p>You're about to have people say mean things about you.</p>
-								<div class="form-group">
-									<input type="text" placeholder="Email" class="form-control">
-								</div>
-								<div class="form-group">
-									<input type="username" placeholder="Username" class="form-control">
-								</div>
-								<div class="form-group">
-									<input type="password" placeholder="Password" class="form-control">
-								</div>
-								<div class="form-group">
-									<input type="verifypassword" placeholder="Verify Password" class="form-control">
-								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<!-- Trigger the modal with a button -->
-							</div>
-							<div class="step-pane sample-pane bg-info alert" data-step="2">
-								<h4>Upload a Photo</h4>
-								<p>If you would like to become a roastee, upload a photo of yourself holding a sign verifying you know what you're getting yourself into.</p>
-										<form action="upload.php" method="post" enctype="multipart/form-data">
-											Select image to upload:
-											<input type="file" name="fileToUpload" id="fileToUpload">
-											<input type="submit" value="Upload Image" name="submit">
-										</form>
-							</div>
-						</div>
-					</div>
+					{% include 'registerForm.twig' %}
 					<!-- End Wizard -->
 				</div>
 				<div class="modal-footer">
@@ -141,6 +92,13 @@
           </button>
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
+							{% if auth.check %}
+							<h3>
+								Hello, {{ auth.user.username }}
+							</h3>
+							<button type="submit" class="btn btn-primary">Change Password</button>
+							<a href="{{ path_for('logout') }}" class="btn btn-primary">Sign out</a>
+							{% else %}
 							<form class="navbar-form navbar-right">
 								<div class="form-group">
 									<input type="text" placeholder="Email" class="form-control">
@@ -153,7 +111,7 @@
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
 							</form>
 							<!-- Trigger the modal with a button -->
-
+							{% endif %}
 						</div>
 						<!--/.navbar-collapse -->
 					</div>
