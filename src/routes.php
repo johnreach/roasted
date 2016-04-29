@@ -12,3 +12,6 @@ $app->get('/logout', 'AuthController:getLogout')->setName('logout');
 
 $app->get('/upload', 'UploadController:getUpload')->setName('upload');
 $app->post('/upload', 'UploadController:postUpload');
+
+$app->get('/photo/{user_id}', 'PhotoController:getPhoto')->setName('showPhoto');
+$app->get('/photos/{photo_count}', 'PhotoController:getPhotos')->setName('showPhotos');

@@ -62,3 +62,8 @@ $container['validator'] = function($container) {
     
     return new \Roasted\Validation\Validator;
 };
+
+$container['UploadController'] = function($container) {
+  
+    return new \Roasted\Controllers\UploadController($container);
+};

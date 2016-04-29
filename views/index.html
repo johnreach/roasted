@@ -214,7 +214,12 @@
 		<script src="public/js/custom/RequestController.js"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="{{ base_url() }}public/js/ie10-viewport-bug-workaround.js"></script>
-
+		<script>
+		  UPLOADCARE_LOCALE = "en";
+		  UPLOADCARE_TABS = "file url facebook gdrive dropbox instagram evernote flickr skydrive";
+		  UPLOADCARE_PUBLIC_KEY = "879e2752d43a2f3aeb52";
+		</script>
+		<script charset="utf-8" src="//ucarecdn.com/widget/2.8.2/uploadcare/uploadcare.full.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				var unique_id = $.gritter.add({
