@@ -19,52 +19,53 @@ class AuthController extends Controller {
     
     public function getRegister($request, $response) {
         
-        return $this->view->render($response, 'register.twig');
+        return $this->view->render($response, "registerForm.twig");
     }
     
     public function postRegister($request, $response) {
         
         // Pass the request and the rules that we want to check for into
         // the validator 'validate' method.
+        
         $validation = $this->validator->validate($request, [
             'email' => v::noWhitespace()->notEmpty()->email()->uniqueEmail(),
             'username' => v::notEmpty()->uniqueUsername(),
             'password' => v::noWhitespace()->notEmpty(),
         ]);
         
-        if($validation->failed()) {
-            return $response->withRedirect($this->router->pathFor('register'));
-        }
-
-        $user = User::create();
-        $user->email    = $request->getParam('email');
-        $user->username = $request->getParam('username');
-        $user->password = password_hash($request->getParam('password'), PASSWORD_BCRYPT);
-        $user->role     = 'member';
-        $user->save();
+        if(!$validation->failed()) {
         
-        $this->auth->attemptLogin($user->email, $request->getParam('password'));
+            $user = User::create();
+            $user->email    = $request->getParam('email');
+            $user->username = $request->getParam('username');
+            $user->password = password_hash($request->getParam('password'), PASSWORD_BCRYPT);
+            $user->role     = 'member';
+            $user->save();
 
-        return $response->withRedirect($this->router->pathFor('index'));
+            $this->auth->attemptLogin($user->email, $request->getParam('password'));
+            //$this->view->getEnvironment->addGlobal('accountCreated', true);
+            return $response->withRedirect($this->router->pathFor('register'));
 
+        }
+        
+        return $response->withRedirect($this->router->pathFor('register'));
     }
     
     
     public function getLogin($request, $response) {
         
-        return $this->view->render($response, 'login.twig');
+        return $this->view->render($response, 'index.html');
     }
     
     public function postLogin($request, $response) {
         
-        $auth = $this->auth->attemptLogin(
+        $this->auth->attemptLogin(
             $request->getParam('email'),
             $request->getParam('password')
         );
-            
+
         if(!$auth)
-            return $response->withRedirect($this->router->pathFor('login'));
-        
+            $_SESSION['validationErrors']['loginFailed'] = true;
         
         return $response->withRedirect($this->router->pathFor('index'));
     }

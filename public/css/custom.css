@@ -35,3 +35,7 @@ table tr td:last-child {
     width: 1px;
     text-align:right;
 }
+
+#loginField h3 {
+    display: inline-block;
+}

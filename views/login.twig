@@ -1,10 +1,22 @@
-<form class="navbar-form navbar-right" action="{{ path_for('login') }}" method="post">
-    <div class="form-group{{ errors.email ? ' has-error' : ''}}">
-        <input type="text" placeholder="Email" name="email" vlaue="{{ oldInput.email }}" class="form-control">
+<section id="loginField" class="navbar-right">
+{% if auth.check %}
+<h3>
+    Hello, {{ auth.user.username }}
+</h3>
+<button type="submit" class="btn btn-primary">Change Password</button>
+<a href="{{ path_for('logout') }}" class="btn btn-primary">Sign out</a>
+{% else %}
+<form class="navbar-form" action="login" method="post" id="loginForm">
+
+    <div class="form-group{{ errors.loginFailed ? ' has-error' : ''}}">
+        <input type="text" placeholder="Email" {{ errors.loginFailed ? 'data-toggle="tooltip" id="loginFailed" title="Incorrect login details"' : '' }} name="email" class="form-control">
     </div>
-    <div class="form-group{{ errors.password ? ' has-error' : ''}}">
+    <div class="form-group{{ errors.loginFailed ? ' has-error' : ''}}">
         <input type="password" placeholder="Password" name="password" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
    {{ csrf.field | raw }}
 </form>
+{% endif %}
+</section>
