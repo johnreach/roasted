@@ -67,3 +67,13 @@ $container['UploadController'] = function($container) {
   
     return new \Roasted\Controllers\UploadController($container);
 };
+
+$container['PhotoController'] = function($container) {
+  
+    return new \Roasted\Controllers\PhotoController($container);
+};
+
+$container['CommentController'] = function($container) {
+  
+    return new \Roasted\Controllers\CommentController($container);
+};

@@ -30,7 +30,7 @@ class Auth {
     
     public function getUser() {
         
-        return !$this->checkLogin() ?: User::find_one($_SESSION['user']);
+        return !isset($_SESSION['user']) ?: User::find_one($_SESSION['user']);
     }
     
     public function logout() {

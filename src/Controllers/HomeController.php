@@ -9,6 +9,7 @@
 namespace Roasted\Controllers;
 
 use \Roasted\Controllers\Controller;
+use Roasated\Models\Photo;
 
 class HomeController extends Controller {
     
@@ -16,5 +17,5 @@ class HomeController extends Controller {
         
         return $this->view->render($response, 'index.html');
     }
-  
+    
 }

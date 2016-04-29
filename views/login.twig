@@ -5,7 +5,7 @@
 </h3>
 <a href="{{ path_for('logout') }}" class="btn btn-primary">Sign out</a>
 {% else %}
-<form class="navbar-form" action="login" method="post" id="loginForm">
+<form class="navbar-form" action="{{ path_for('login') }}" method="post" id="loginForm">
 
     <div class="form-group{{ errors.loginFailed ? ' has-error' : ''}}">
         <input type="text" placeholder="Email" {{ errors.loginFailed ? 'data-toggle="tooltip" id="loginFailed" title="Incorrect login details"' : '' }} name="email" class="form-control">
