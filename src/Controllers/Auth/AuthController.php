@@ -31,6 +31,7 @@ class AuthController extends Controller {
             'email' => v::noWhitespace()->notEmpty()->email()->uniqueEmail(),
             'username' => v::notEmpty()->uniqueUsername(),
             'password' => v::noWhitespace()->notEmpty(),
+            'password2' => v::equals(v::key('password'))->setTemplate('Passwords must match'),
         ]);
         
         if(!$validation->failed()) {

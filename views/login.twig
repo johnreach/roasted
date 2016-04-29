@@ -3,7 +3,6 @@
 <h3>
     Hello, {{ auth.user.username }}
 </h3>
-<button type="submit" class="btn btn-primary">Change Password</button>
 <a href="{{ path_for('logout') }}" class="btn btn-primary">Sign out</a>
 {% else %}
 <form class="navbar-form" action="login" method="post" id="loginForm">
@@ -15,7 +14,7 @@
         <input type="password" placeholder="Password" name="password" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Sign in</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
+    <a href="register" class="btn btn-primary">Register</a>
    {{ csrf.field | raw }}
 </form>
 {% endif %}
