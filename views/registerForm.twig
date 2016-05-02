@@ -32,10 +32,7 @@
         {% if auth.check %}
         <form method="post" action="{{ path_for('upload') }}">
          
-            <h4>Upload a Photo</h4>
-            <p>If you would like to become a roastee, upload a photo of yourself holding a sign verifying you know what you're getting yourself into.</p>
-            Select image to upload:
-            <input type="hidden" role="uploadcare-uploader" data-images-only="true">
+            {% include "uploadForm.twig" %}
                 
         </form>
         {% endif %}

@@ -13,15 +13,24 @@ use \Roasted\Models\Photo;
 
 class PhotoController extends Controller {
     
-    public function getPhoto($response, $response, $args) {
+    public function getPhoto($request, $response, $args) {
         
         $this->view->getEnvironment()->addGlobal('photo', 
-            Photo::find_array('id', $args['photo_id']));
+            Photo::find_one($args['photo_id']));
                 
         $this->view->getEnvironment()->addGlobal('comments',
             $this->CommentController->getComments($args['photo_id']));
         
         return $this->view->render($response, 'view_photo.twig');
+    }
+    
+    public function getPhotos($request, $response) {
+        
+         $this->view->getEnvironment()->addGlobal('photo', 
+            Photo::find_array());
+        
+        //return $this->view->render($response, 'index.html');
+        
     }
 }   
 

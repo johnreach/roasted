@@ -1,6 +1,9 @@
 {% extends "index.html" %}
 {% block content %}
-{{ photo | json_encode }}
+
+<div class="col-lg-8 col-md-8 col-sm-8 mb">
+    <img src="{{ photo.uuid_url }}" class="col-lg-8 col-md-8 col-sm-8 mb">
+</div>
 {% for comment in comments %}
 <div class="col-lg-8 col-md-8 col-sm-8 mb">
     <div class="weather-2 pn">
@@ -23,9 +26,9 @@
 {% endfor %}
 
 {% if auth.check %}
-<form action="{{ path_for('postComment', { 'photo_id': photo_id }) }}" class="col-lg-8 col-md-8 col-sm-8 " method="post" id="postComment">
+<form action="{{ path_for('postComment', { 'photo_id': photo.id }) }}" class="col-lg-8 col-md-8 col-sm-8 " method="post" id="postComment">
     <input type="hidden" id="parent_id" name="parent_id" value="0">
-    <input type="hidden" id="photo_id" name="photo_id" value="{{ photo_id }}">
+    <input type="hidden" id="photo_id" name="photo_id" value="{{ photo.id }}">
     <textarea class="form-control" placeholder="Give 'em your worst!" name="cmt" id="cmt" rows="3"></textarea>
     <button type="submit" class="btn btn-default">Post Comment</button>
     {{ csrf.field | raw }}

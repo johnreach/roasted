@@ -1,0 +1,15 @@
+{% for photo in photos %}
+
+<a href="{{ path_for('showPhoto', { 'photo_id': photo.id }) }}">
+<div class="col-lg-4 col-md-4 col-sm-4 mb">
+    <!-- INSTAGRAM PANEL -->
+    <div class="instagram-panel pn" style="background: url({{ photo.uuid_url }}) no-repeat center top">
+        <i class="fa fa-instagram fa-4x"></i>
+        <p>{{ photo.title }}<br>
+            5 min. ago
+        </p>
+        <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
+    </div>
+</div>
+</a>
+{% endfor %}
