@@ -135,7 +135,7 @@
 
 	<!--script for this page-->
 		<script src="{{ path_for('index') }}public/js/jqueryupload.js"></script>
-		<script src="{{ path_for('index') }}public/js/custom/roasted.js"></script>
+		
 
 		<!-- jQuery -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
@@ -146,25 +146,16 @@
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="{{ path_for('index') }}public/js/ie10-viewport-bug-workaround.js"></script>
+		
+		<script src="{{ path_for('index') }}public/js/custom/roasted.js"></script>
+		
 		<script>
-  	UPLOADCARE_LOCALE = "en";
-  	UPLOADCARE_TABS = "file url";
-  	UPLOADCARE_PUBLIC_KEY = "047893cb312c34437ac1";
-	</script>
-	<script charset="utf-8" src="//ucarecdn.com/widget/2.8.2/uploadcare/uploadcare.full.min.js"></script>
-
-		<script type="text/javascript">
-			$('#registerWizard').on('actionclicked.fu.wizard', function (evt, data) {
-
-				if(data.step == 1) {
-					console.log('registerPlease');
-					$('form#registerForm').submit();
-					evt.preventDefault();
-				}
-
-			});
-
+			UPLOADCARE_LOCALE = "en";
+			UPLOADCARE_TABS = "file url";
+			UPLOADCARE_PUBLIC_KEY = "047893cb312c34437ac1";
 		</script>
+		<script charset="utf-8" src="//ucarecdn.com/widget/2.8.2/uploadcare/uploadcare.full.min.js"></script>
+
 		{% if auth.check %}
 		<script type="text/javascript">
 			$('#registerWizard').wizard('selectedItem', { step: 2 });

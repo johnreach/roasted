@@ -17,23 +17,23 @@
         
         <div class="step-pane active sample-pane alert" data-step="1" id="register-step1">
             {% if not auth.check %}
+                <section id="registerField">
                 {% include 'registerForm.twig' %}
+                </section>
             {% endif %}
         </div>
         <div class="step-pane sample-pane bg-info alert" data-step="2">
+        <section id="uploadField">
         {% if auth.check %}
-        <form method="post" action="{{ path_for('upload') }}">
-         
             {% include "uploadForm.twig" %}
-                
-        </form>
         {% endif %}
+        </section>
         </div>
         
         <div class="actions">
-            <!-- <button type="button" class="btn btn-default btn-prev">
-            <span class="glyphicon glyphicon-arrow-left"></span>Prev</button> -->
-            <button type="button" class="btn btn-primary btn-next" id="registerSumit" data-last="Complete">Next
+            <!--<button type="button" class="btn btn-default btn-prev">
+            <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>-->
+            <button class="btn btn-primary btn-next" id="registerSubmit" data-last="Complete">Next
             <span class="glyphicon glyphicon-arrow-right"></span></button>
         </div>
         

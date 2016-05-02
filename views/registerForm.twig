@@ -1,4 +1,4 @@
-<form method="post" action="{{ path_for('register')}}" autocomplete="off" id="registerForm">
+<form action="{{ path_for('register') }}" method="post" autocomplete="off" id="registerForm">
 
     <h4>Account Details</h4>
     <p>You're about to have people say mean things about you.</p>
@@ -29,4 +29,5 @@
     </div>
 
     {{ csrf.field | raw }}
+        
 </form>

@@ -15,13 +15,14 @@ function IsJsonString(str) {
     }
     return true;
 }
-$("#loginForm").submit(function(e) {
+$('body').on('submit','#loginForm', function(e) {
     //var url = $("#loginForm").action;
     //alert(url);
     console.log("submited");
     $.ajax({
            type: "POST",
            url: "login",
+           cache: false,
            data: $("#loginForm").serialize(), // serializes the form's elements.
            success: function(data)
            {
@@ -43,6 +44,7 @@ $("#loginForm").submit(function(e) {
                     
                     console.log('login failed');
                     $("#loginField").html(data);
+                    return false;
                 }
                 
            }
@@ -51,28 +53,31 @@ $("#loginForm").submit(function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
 });
 
-$('#registerWizard').on('actionclicked.fu.wizard', function (evt, data) {
- 
-    if(data.step == 1) {
-        console.log('registerPlease');
+
+$('#registerWizard').on('actionclicked.fu.wizard', function (evt, d) {
+
+    if(d.step == 1) {
+     
         $.ajax({
            type: "POST",
            url: "register",
+           cache: false,
            data: $("#registerForm").serialize(), // serializes the form's elements.
            success: function(data)
            {
                 console.log(data);
-       
+                
                 if(IsJsonString(data)) {
                     
                     data = JSON.parse(data);
                     
                     if(data.registerSuccess) {
+                        console.log(data);
+                        $('#registerWizard').wizard('selectedItem', {
+			                step: 2
+		                });
                         
-                        $('#registerModal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                        location.reload();
+                        $('#uploadField').load(data.route);
                     }
                     
                 } else {
@@ -83,11 +88,27 @@ $('#registerWizard').on('actionclicked.fu.wizard', function (evt, data) {
                 
            }
          });
-        evt.preventDefault();
+        
+    } else if(d.step == 2) {
+
+        $('#uploadForm').submit();
+        $('#loginModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        location.reload();
     }
-    
+  
+    evt.preventDefault();
+
+});
+
+$('#registerModal').on('hide.bs.modal', function () {
+    if($('#registerWizard').wizard('selectedItem').step == 2) {
+        location.reload();
+    }
 });
 
 
-$('#loginFailed').tooltip({placement: 'left',trigger: 'manual'}).tooltip('show');
+
+$('#loginFailed').tooltip({placement: 'top',trigger: 'manual'}).tooltip('show');
 $('#loginFailed').on('click',function(){$(this).tooltip('destroy');});
