@@ -52,11 +52,12 @@ $('body').on('submit','#loginForm', function(e) {
         
     e.preventDefault(); // avoid to execute the actual submit of the form.
 });
+console.log($('#uploadForm'));
 
-
+$(document).ready(function(){
 $('#registerWizard').on('actionclicked.fu.wizard', function (evt, d) {
 
-    if(d.step == 1) {
+	if(d.step == 1) {
      
         $.ajax({
            type: "POST",
@@ -76,7 +77,7 @@ $('#registerWizard').on('actionclicked.fu.wizard', function (evt, d) {
                         $('#registerWizard').wizard('selectedItem', {
 			                step: 2
 		                });
-                        
+						
                         $('#uploadField').load(data.route);
                     }
                     
@@ -90,9 +91,11 @@ $('#registerWizard').on('actionclicked.fu.wizard', function (evt, d) {
          });
         
     } else if(d.step == 2) {
-
-        $('#uploadForm').submit();
-        $('#loginModal').modal('hide');
+		
+		console.log($('#uploadForm'));
+		$('#uploadForm').sumbit();
+		$('#doUpload').click();
+        $('#registerModal').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
         location.reload();
@@ -101,7 +104,7 @@ $('#registerWizard').on('actionclicked.fu.wizard', function (evt, d) {
     evt.preventDefault();
 
 });
-
+});
 $('#registerModal').on('hide.bs.modal', function () {
     if($('#registerWizard').wizard('selectedItem').step == 2) {
         location.reload();

@@ -4,7 +4,7 @@ body {
   padding-bottom: 20px;
 }
 #main-content{
-    /*max-width: 100%;*/
+    max-width: 100%;
     overflow-x: hidden;
 }
 .carousel-inner>.item>img {
@@ -38,4 +38,8 @@ table tr td:last-child {
 
 #loginField h3 {
     display: inline-block;
+}
+
+.thumb {
+    min-height: 220px;
 }

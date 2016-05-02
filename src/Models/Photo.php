@@ -10,6 +10,7 @@
 namespace Roasted\Models;
 
 use Model;
+use \Roasted\Models\Comment;
 
 class Photo extends Model {
     
@@ -19,5 +20,4 @@ class Photo extends Model {
         
         return $this->has_one('User');
     }
-    
 }

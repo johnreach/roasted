@@ -2,12 +2,16 @@
 
 <a href="{{ path_for('showPhoto', { 'photo_id': photo.id }) }}">
 <div class="col-lg-4 col-md-4 col-sm-4 mb">
-    <!-- INSTAGRAM PANEL -->
-    <div class="instagram-panel pn" style="background: url({{ photo.uuid_url }}) no-repeat center top">
-        <p>{{ photo.title }}<br>
-            5 min. ago
-        </p>
-        <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
+    <div class="content-panel pn">
+        <div class="thumb" id="spotify" style="background: url({{ photo.uuid_url }}-/scale_crop/600x600/center/-/quality/best/-/resize/300/) no-repeat center top">
+            <div class="col-xs-4 col-xs-offset-8">
+                <button class="btn btn-sm btn-clear-g">{{ photo.username }}</button>
+            </div>
+            <div class="sp-title">
+                <h3>{{ photo.title }}</h3>
+            </div>
+        </div>
+        <p class="followers"><i class="fa fa-user"></i>{{ photo.comments }} Comments</p>
     </div>
 </div>
 </a>

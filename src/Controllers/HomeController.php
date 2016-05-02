@@ -11,13 +11,17 @@ namespace Roasted\Controllers;
 use \Roasted\Controllers\Controller;
 use \Roasted\Controllers\PhotoController;
 use \Roasted\Models\Photo;
+use \Roasted\Models\Comment;
 
 class HomeController extends Controller {
     
     public function index($request, $response) {
         
+        $photos = Photo::find_array();
+  
+        
         $this->view->getEnvironment()->addGlobal('photos', 
-            Photo::where('username', 'tester')->find_array());
+            $photos);
         
         return $this->view->render($response, 'index.html');
     }

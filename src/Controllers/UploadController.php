@@ -32,9 +32,13 @@ class UploadController extends Controller {
         
             $photo = Photo::create();
             $photo->username   = $this->auth->getUser()->username;
-            $photo->uuid_url   = $request->getParam('upload');
+            $photo->uuid_url   = $request->getParam('uuid');
             $photo->date       = date("Y-m-d H:i:s");
             $photo->title      = $request->getParam('title');
+            
+            $user = User::where('username', $this->auth->getUser()->username)->find_one();
+            $user->role = "roastee";
+            $user->save();
             $photo->save();
 
             return $response->withRedirect($this->router->pathFor('index'));

@@ -1,18 +1,18 @@
 {% extends "index.html" %}
 {% block content %}
 
-<div class="col-lg-8 col-md-8 col-sm-8 mb">
-    <img src="{{ photo.uuid_url }}" class="col-lg-8 col-md-8 col-sm-8 mb">
+<div class="col-lg-4 col-md-4 col-sm-4 mb" class="photowrapper">
+    <img src="{{ photo.uuid_url }}-/scale_crop/600x600/center/-/quality/best/-/resize/300/" class="col-lg-4 col-md-4 col-sm-4 mb" id = "thephoto">
 </div>
 {% for comment in comments %}
-<div class="col-lg-8 col-md-8 col-sm-8 mb">
+<div class="col-lg-4 col-md-4 col-sm-4 mb">
     <div class="weather-2 pn">
         <div class="weather-2-header">
             <div class="row">
-                <div class="col-sm-6 col-xs-6">
+                <div class="col-sm-3 col-xs-3">
                     <p>{{ comment.username }}</p>
                 </div>
-                <div class="col-sm-6 col-xs-6 goright">
+                <div class="col-sm-3 col-xs-3 goright">
                     <p class="small">{{ comment.date }}</p>
                 </div>
             </div>
@@ -26,7 +26,7 @@
 {% endfor %}
 
 {% if auth.check %}
-<form action="{{ path_for('postComment', { 'photo_id': photo.id }) }}" class="col-lg-8 col-md-8 col-sm-8 " method="post" id="postComment">
+<form action="{{ path_for('postComment', { 'photo_id': photo.id }) }}" class="col-lg-4 col-md-4 col-sm-4 " method="post" id="postComment">
     <input type="hidden" id="parent_id" name="parent_id" value="0">
     <input type="hidden" id="photo_id" name="photo_id" value="{{ photo.id }}">
     <textarea class="form-control" placeholder="Give 'em your worst!" name="cmt" id="cmt" rows="3"></textarea>

@@ -10,6 +10,7 @@ namespace Roasted\Controllers;
 
 use \Roasted\Controllers\Controller;
 use \Roasted\Models\Photo;
+use \Roasted\Models\Comments;
 
 class PhotoController extends Controller {
     
@@ -31,6 +32,16 @@ class PhotoController extends Controller {
         
         //return $this->view->render($response, 'index.html');
         
+    }
+    
+    public function getComments() {
+        
+        return Comments::has_many()->find_array();
+    }
+    
+    public function getCommentsCount() {
+        
+        return Comments::has_many()->count();;
     }
 }   
 

@@ -1,9 +1,13 @@
-<form action="{{ path_for('upload') }}" method="post" enctype="multipart/form-data">
+<form action="{{ path_for('upload') }}" method="post" enctype="multipart/form-data" id="uploadForm">
 	Select image to upload:
-	<div>
-		<input type="text" name="title" placeholder="Title">
-		<input type="hidden" role="uploadcare-uploader" name="upload" data-crop="disabled" data-preview-step="true" data-images-only="true" />
+	<div class="form-group">
+		<input type="text" class="form-control" name="title" placeholder="Title">
 	</div>
-	<input type="submit" value="Upload Image" name="submit">
+	<div class="form-group">
+		<input type="hidden" role="uploadcare-uploader" name="uuid" class="form-control" data-crop="disabled" data-preview-step="true" data-images-only="true" />
+	</div>
+	<div class="form-group">
+		<input type="submit" name="doUpload" id="doUpload" value="Upload!">
+	</div>
 	{{ csrf.field | raw }}
 </form>

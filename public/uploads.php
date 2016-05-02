@@ -1,5 +1,5 @@
 <?php
-  $uploadDirectory   = "uploads/";
+  $uploadDirectory   = "ucare.com/047893cb312c34437ac1";
   $origName          = basename($_FILES["fileToUpLoad"]["name"] );
   $uploadOk          = false;
   $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
