@@ -1,21 +1,8 @@
-<section id="loginField" class="navbar-right">
+<ul class="nav pull-right top-menu">
 {% if auth.check %}
-<h3>
-    Hello, {{ auth.user.username }}
-</h3>
-<a href="{{ path_for('logout') }}" class="btn btn-primary">Sign out</a>
+    <li><a href="{{ path_for('logout') }}" id="logoutButton" class="logout">Sign Out</a></li>
 {% else %}
-<form class="navbar-form" action="{{ path_for('login') }}" method="post" id="loginForm">
-
-    <div class="form-group{{ errors.loginFailed ? ' has-error' : ''}}">
-        <input type="text" placeholder="Email" {{ errors.loginFailed ? 'data-toggle="tooltip" id="loginFailed" title="Incorrect login details"' : '' }} name="email" class="form-control">
-    </div>
-    <div class="form-group{{ errors.loginFailed ? ' has-error' : ''}}">
-        <input type="password" placeholder="Password" name="password" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-    <a href="register" class="btn btn-primary">Register</a>
-   {{ csrf.field | raw }}
-</form>
+    <li><button id="loginButton" class="logout" data-toggle="modal" data-target="#loginModal">Sign In</button></li>
+    <li><button id="registerButton" class="logout" data-toggle="modal" data-target="#registerModal">Sign Up</button></li>
 {% endif %}
-</section>
+</ul>

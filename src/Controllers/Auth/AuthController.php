@@ -44,12 +44,15 @@ class AuthController extends Controller {
             $user->save();
 
             $this->auth->attemptLogin($user->email, $request->getParam('password'));
-            //$this->view->getEnvironment->addGlobal('accountCreated', true);
-            return $response->withRedirect($this->router->pathFor('register'));
+            $response->getBody()->write(json_encode([
+                'loginSuccess' => $auth,
+            ]));
+            
+            return $response;
 
         }
         
-        return $response->withRedirect($this->router->pathFor('register'));
+        return $this->view->render($response, 'registerForm.twig');
     }
     
     
@@ -60,15 +63,21 @@ class AuthController extends Controller {
     
     public function postLogin($request, $response) {
         
-        $this->auth->attemptLogin(
+        $auth = $this->auth->attemptLogin(
             $request->getParam('email'),
             $request->getParam('password')
         );
-
-        if(!$auth)
-            $_SESSION['validationErrors']['loginFailed'] = true;
         
-        return $response->withRedirect($this->router->pathFor('index'));
+        if(!$auth) 
+            $this->view->getEnvironment()->addGlobal('errors',[
+                'loginFailed' => !$auth,
+            ]);
+        else
+            $response->getBody()->write(json_encode([
+                'loginSuccess' => $auth,
+            ]));
+        // Either return a JSON or return the form again
+        return $auth ? $response : $this->view->render($response, 'loginForm.twig');
     }
     
     public function getLogout($request, $response) {

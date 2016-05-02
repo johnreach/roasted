@@ -15,7 +15,7 @@
 	<!--external css-->
 	<link href="{{ path_for('index') }}/public/assets/font/morecss/font-awesome.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="{{ path_for('index') }}/public/css/zabuto_calendar.css">
-	<link rel="stylesheet" type="text/css" href="{{ path_for('index') }}/public/css/gritter/css/jquery.gritter.css" />
+	<link rel="stylesheet" type="text/css" href="{{ path_for('index') }}/public/js/gritter/css/jquery.gritter.css" />
 	<link rel="stylesheet" type="text/css" href="{{ path_for('index') }}/public/css/lineicons/style.css">
 
 	<!-- Fuelux -->
@@ -42,40 +42,29 @@
 
 <body class="fuelux">
 	{% import "macros.twig" as m %}
+	{% include "registerModal.twig" %}
+	{% include "loginModal.twig" %}
 	<!-- End Register Form Modal -->
+			<!--header start-->
+		<header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="{{ path_for('index') }}" class="logo"><b>Roasted</b></a>
+            <!--logo end-->
+            <div class="top-menu">
+			<!-- Login / Loggout / Register buttons -->
+			{% include 'login.twig' %}
+			<!-- End Login / Loggout / Register buttons -->
+            </div>
+        </header>
+		<!--header end-->
 	<section id="container">
 		<!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
-		<!--header start-->
-		<header class="header black-bg">
-			<div class="sidebar-toggle-box">
-				<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-			</div>
-			<!--logo start-->
-			<a href="index.html" class="logo"><b>Roasted</b></a>
-			<!--logo end-->
 
-			<div class="top-menu">
-				<ul class="nav pull-right top-menu">
-					<div class="container">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-						</div>
-						<div id="navbar" class="navbar-collapse collapse">
-							{% include 'login.twig' %}
-						</div>
-						<!--/.navbar-collapse -->
-					</div>
-				</ul>
-			</div>
-		</header>
-		<!--header end-->
 
 		<!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
@@ -89,7 +78,7 @@
 					<p class="centered">
 						<a href="profile.html"><img src="{{ path_for('index') }}/public/assets/img/ui-sam.jpg" class="img-circle" width="60"></a>
 					</p>
-					<h5 class="centered">Roastee</h5>
+					<h5 class="centered">{{ auth.check ? auth.user.username : 'Guest' }}</h5>
 
 					<li class="mt">
 						<a class="active" href="index.html">
@@ -99,7 +88,7 @@
 					</li>
 
 					<li class="sub-menu">
-						<a href="javascript:;">
+						<a href="index.html">
 							<i class="fa fa-desktop"></i>
 							<span>List View</span>
 						</a>
@@ -146,7 +135,7 @@
 
 	<!--script for this page-->
 		<script src="{{ path_for('index') }}public/js/jqueryupload.js"></script>
-		<script src="{{ path_for('index') }}public/js/roasted.js"></script>
+		<script src="{{ path_for('index') }}public/js/custom/roasted.js"></script>
 
 		<!-- jQuery -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
@@ -157,7 +146,6 @@
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<script src="{{ path_for('index') }}public/js/ie10-viewport-bug-workaround.js"></script>
-		<script src="{{ path_for('index') }}public/js/uploads.js"></script>
 		<script>
   	UPLOADCARE_LOCALE = "en";
   	UPLOADCARE_TABS = "file url";

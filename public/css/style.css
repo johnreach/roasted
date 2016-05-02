@@ -409,6 +409,8 @@ ul.sidebar-menu li a.active i {
     position: fixed;
     left: 0;
     right: 0;
+	width: 100%;
+	-webkit-backface-visibility: hidden;
     z-index: 1002;
 }
 
